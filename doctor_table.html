@@ -1,0 +1,77 @@
+<div id="doctor-cards-container" class="cards-container">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Speciality</th>
+            <th>Manage</th>
+        </tr>
+        {% for doctor in doctors %}
+        <tr>
+            <td>{{ doctor.id }}</td>
+            <td>{{ doctor.name }}</td>
+            <td>{{ doctor.prenom }}</td>
+            <td>{{ doctor.email }}</td>
+            <td>{{ doctor.adress }}</td>
+            <td>{{ doctor.spécialité }}</td>
+            <td>
+                
+                
+                <a href="{% url 'add_doctor' %}" class="add-button">Add</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var addButton = document.querySelector('.add-button');
+        addButton.addEventListener('click', function() {
+            // Logic to handle the "Add" button click event
+            // You can show a form or perform any other action to add a new doctor
+            console.log('Add button clicked');
+        });
+    });
+</script>
+
+<style>
+    /* CSS for table */
+    #doctor-cards-container {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    /* CSS for buttons */
+    .delete-button, .add-button {
+        padding: 5px 10px;
+        margin-right: 5px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    .delete-button:hover, .add-button:hover {
+        background-color: #45a049;
+    }
+</style>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sidebar Menu Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .app-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 98%;
+      background-color: #0fe693;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .app-bar .admin-title {
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .profile-icon {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 85px;
+      left: 0;
+      width: 200px;
+      height: calc(100% - 80px);
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 30px;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      background-color: #0fe693;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: #45a049;
+    }
+
+    .logout-icon {
+      margin-right: 10px;
+    }
+
+    /* CSS for table */
+    #doctor-cards-container {
+      width: 100%;
+      margin-top: 20px;
+    }
+    /* CSS for card */
+    .card{
+      width: 500px;
+      height: 50px;
+      padding-top: 100px;
+      margin-top: 20px; 
+      margin-left: 300px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+    }
+    .app-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 98%;
+  background-color: #0fe693;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+ 
+  margin-bottom: 20px;
+}
+
+.app-bar .admin-title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.app-bar-text {
+  font-size: 24px;
+  margin-right: 10px;
+  margin-left: 800px;
+}
+
+.profile-icon {
+  cursor: pointer;
+}
+
+/* Rest of your CSS code */
+
+  </style>
+  <script>
+    function showDoctorTable() {
+      var tableContainer = document.getElementById('table-container');
+      tableContainer.style.display = 'block';
+      attachButtonEventListeners();
+    }
+
+    function attachButtonEventListeners() {
+      var addButton = document.querySelector('.add-button');
+      addButton.addEventListener('click', function() {
+        console.log('Add button clicked');
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var profileIcon = document.querySelector('.profile-icon');
+      profileIcon.addEventListener('click', function() {
+        window.location.href = 'profile.html';
+      });
+
+      var doctorLink = document.querySelector('.doctor-link');
+      doctorLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        showDoctorTable();
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="app-bar">
+    <span class="admin-title">Admin | DomiCare</span>
+    <span class="app-bar-text">Mohamed All</span>
+    <i class="fas fa-user-circle fa-2x profile-icon"></i>
+  </div>
+  <div class="sidebar">
+    <ul>
+      <li><a href="{% url 'doctor_list' %}"><i class="fas fa-user-md logout-icon"></i>Doctor</a></li>
+      <li><a href="{% url 'nurse_list' %}"><i class="fas fa-user-nurse logout-icon"></i>Nurse</a></li>
+      <li><a href="{% url 'driver_list' %}"><i class="fas fa-car logout-icon"></i>Driver</a></li>
+      <li><a href="{% url 'Menu' %}"><i class="fas fa-user logout-icon"></i>Patient</a></li>
+      <li><a href="{% url 'request' %}"><i class="fas fa-user logout-icon"></i>Patient Request</a></li>
+      <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt logout-icon"></i>Logout</a></li>
+    </ul>
+  </div>
+  <!-- Rest of your HTML content -->
+
+  <div id="main-content">
+    <div class="card">
+      <div class="card-header">
+        <a href="{% url 'add_doctor' %}">
+          <img src="https://cdn-icons-png.flaticon.com/512/194/194915.png" alt="Doctor Icon" style="width: 160px; height: 160px; background-color: #fff;">
+        </a>
+        <br>
+        <span style="margin-left: 10px; font-size: 24px;">Add Doctor</span>
+      </div>
+      <div class="card-body">
+        <!-- Card content goes here -->
+      </div>
+    </div>
+<br>
+    <div class="card">
+      <div class="card-header">
+        <a href="{% url 'add_nurse' %}">
+          <img src="https://cdn-icons-png.flaticon.com/128/3022/3022341.png" alt="Nurse Icon" style="width: 160px; height: 160px; background-color: #fff;">
+        </a>
+        <br>
+        <span style="margin-left: 10px; font-size: 24px;">Add Nurse</span>
+      </div>
+      <div class="card-body">
+        <!-- Card content goes here -->
+      </div>
+    </div>
+<br>
+    <div class="card">
+      <div class="card-header">
+        <a href="{% url 'add_driver' %}">
+          <!-- Replace the URL above with the desired URL for the new card -->
+          <img src="https://cdn-icons-png.flaticon.com/512/196/196134.png" alt="Icon" style="width: 160px; height: 160px; background-color: #fff;">
+          <!-- Replace the URL above with the URL of the desired image for the new card -->
+        </a>
+        <br>
+        <span style="margin-left: 10px; font-size: 24px;">Add Driver</span>
+        <!-- Replace the text above with the desired title for the new card -->
+      </div>
+      <div class="card-body">
+        <!-- Card content goes here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Rest of your HTML content -->
+</body>
+</html>

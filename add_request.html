@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Request for {{ patient }}</h1>
+<form method="post">
+  {% csrf_token %}
+  <label for="date">Date:</label>
+  <input type="date" name="date" required><br><br>
+  <label for="time">Time:</label>
+  <input type="time" name="time" required><br><br>
+  <label for="time">Adress:</label>
+  <input type="adress" name="adress" required><br><br>
+  <label for="specialite">Specialite:</label>
+  <select name="specialite">
+    {% for specialite in SPECIALITES %}
+      <option value="{{ specialite }}">{{ specialite }}</option>
+    {% endfor %}
+  </select><br><br>
+  <input type="submit" value="Add Request">
+</form>
+{% endblock %}
+
+<style>
+  /* CSS for form */
+  form {
+    margin-top: 20px;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  input[type="date"],
+  input[type="time"],
+  select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>

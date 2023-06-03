@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patient list</title>
+  <style>
+    #app-bar {
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .back-arrow {
+    font-size: 38px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #0dd894;
+    font-weight: bold;
+  }
+
+  .app-title {
+    font-size: 25px;
+    margin: 0;
+  }
+    /* Styles for the tables */
+    .cards-container {
+      display: none;
+      margin-top: 20px;
+    }
+    
+    .cards-container table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .cards-container th,
+    .cards-container td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .cards-container th {
+      background-color: #f2f2f2;
+    }
+    
+    .cards-container tr:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .cards-container .delete-button,
+    .cards-container .add-button {
+      padding: 5px 10px;
+      border: none;
+      background-color: #f44336;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    .cards-container .add-button {
+      background-color: #4caf50;
+      margin-left: 5px;
+    }
+    .cards-container th:nth-child(2),
+    .cards-container td:nth-child(2) {
+      width: 120px;
+    }
+  </style>
+  <script>
+    function showTable(tableId) {
+      // Hide all tables
+      var tables = document.getElementsByClassName("cards-container");
+      for (var i = 0; i < tables.length; i++) {
+        tables[i].style.display = "none";
+      }
+
+      // Show the selected table
+      var selectedTable = document.getElementById(tableId + "-cards-container");
+      selectedTable.style.display = "block";
+    }
+  </script>
+</head>
+
+<body onload="showTable('patient')">
+  <div id="app-bar">
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+    <p class="app-title">Patient List</p>
+  </div>
+
+  <div id="patient-cards-container" class="cards-container">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Prenom</th>
+        <th>Adress</th>
+        <th>Email</th>
+      </tr>
+      {% for patient in patients %}
+      <tr>
+        <td>{{ patient.name }}</td>
+        <td>{{ patient.prenom }}</td>
+        <td>{{ patient.adress }}</td>
+        <td>{{ patient.email }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>
+

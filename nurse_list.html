@@ -1,0 +1,83 @@
+<div id="app-bar">
+    <a href="{% url 'home' %}" class="back-arrow">&#8592;</a>
+    <p class="app-title">Nurse List</p>
+  </div>
+  
+  <div id="nurse-cards-container" class="cards-container">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>Adress</th>
+        <th>Manage</th>
+      </tr>
+      {% for nurse in nurses %}
+      <tr>
+        <td>{{ nurse.name }}</td>
+        <td>{{ nurse.prenom }}</td>
+        <td>{{ nurse.email }}</td>
+        <td>{{ nurse.adress }}</td>
+        <td>
+          <button class="delete-button" data-id="{{ nurse.id }}">Delete</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <style>
+  #app-bar {
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .back-arrow {
+    font-size: 38px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #0dd894;
+    font-weight: bold;
+  }
+  
+  .app-title {
+    font-size: 25px;
+    margin: 0;
+  }
+  
+  /* CSS for table */
+  #nurse-cards-container {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  /* CSS for buttons */
+  .delete-button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: #45a049;
+  }</style>

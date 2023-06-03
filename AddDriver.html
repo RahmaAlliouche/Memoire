@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Driver</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items at the top */
+            height: 100vh;
+        }
+
+        .card {
+            width: 400px;
+            margin-top: 20px; /* Adjust the margin as desired */
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 95%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #app-bar {
+            background-color: #ffffff;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-arrow {
+            font-size: 60px;
+            margin-right: 10px;
+            text-decoration: none;
+            color: #0dd894;
+            font-weight: bold;
+        }
+
+        .app-title {
+            font-size: 2px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-bar">
+        <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+        
+    </div>
+    <div class="container">
+        <div class="card">
+            <h2 class="card-title">Add Driver</h2>
+            <form method="POST" action="{% url 'add_driver' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter name" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom</label>
+                    <input type="text" id="prenom" name="prenom" placeholder="Enter prenom" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="adress">Adress</label>
+                    <input type="text" id="adress" name="adress" placeholder="Enter address" required>
+                </div>
+                
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ patient.name }}'s Requests</h2>
+  <ul>
+    {% for request_obj in patient.request_set.all %}
+      <li>
+        Requested by {{ request_obj.requester.username }} on {{ request_obj.created_at }} 
+        {% if request_obj.is_cancelled %}
+          (Cancelled)
+        {% else %}
+          <a href="{% url 'cancel_request' request_obj.id %}">Cancel</a>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No requests yet.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'add_request' patient.id %}">Add Request</a>
+{% endblock %}

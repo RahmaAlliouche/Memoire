@@ -1,0 +1,121 @@
+<div id="app-bar">
+  <a href="{% url 'home' %}" class="back-arrow">&#8592;</a>
+  <p class="app-title">Doctor List</p>
+</div>
+
+<div id="doctor-cards-container" class="cards-container">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>prenom</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Specialty</th>
+      <th>Manage</th>
+    </tr>
+    {% for doctor in doctors %}
+    <tr>
+      <td>{{ doctor.id }}</td>
+      <td>{{ doctor.name }}</td>
+      <td>{{ doctor.prenom }}</td>
+      <td>{{ doctor.email }}</td>
+      <td>{{ doctor.adress }}</td>
+      <td>{{ doctor.spécialité }}</td>
+      <td>
+        <button class="delete-button" data-id="{{ doctor.id }}">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var deleteButtons = document.querySelectorAll('.delete-button');
+    deleteButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var doctorId = button.dataset.id;
+        deleteDoctor(doctorId);
+      });
+    });
+
+    function deleteDoctor(doctorId) {
+      fetch('/delete-doctor/' + doctorId + '/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'  // Add the CSRF token here
+        },
+      })
+        .then(function(response) {
+          if (response.ok) {
+            console.log('Doctor deleted successfully');
+            location.reload();  // Refresh the page after deletion
+          } else {
+            console.log('Error deleting doctor');
+          }
+        })
+        .catch(function(error) {
+          console.log('Error deleting doctor:', error);
+        });
+    }
+  });
+</script>
+
+<style>
+  #app-bar {
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .back-arrow {
+    font-size: 38px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #0dd894;
+    font-weight: bold;
+  }
+  
+  .app-title {
+    font-size: 25px;
+    margin: 0;
+  }
+  
+  /* CSS for table */
+  #doctor-cards-container {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  /* CSS for buttons */
+  .delete-button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .delete-button:hover {
+    background-color: #45a049;
+  }
+</style>

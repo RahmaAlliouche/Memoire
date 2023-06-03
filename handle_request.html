@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Handle Request for {{ request.patient }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="date">Date:</label>
+    <p>{{ request.date }}</p><br>
+
+    <label for="time">Time:</label>
+    <p>{{ request.time }}</p><br>
+
+    <label for="address">Address:</label>
+    <p>{{ request.address }}</p><br>
+
+    <label for="specialite">Specialite:</label>
+    <p>{{ request.specialite }}</p><br>
+
+    <label for="doctor">Select Doctor:</label>
+    <select name="doctor">
+      {% for doctor in doctors %}
+        <option value="{{ doctor.id }}">{{ doctor.name }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <input type="submit" value="Assign Request">
+  </form>
+{% endblock %}
+
+<style>
+  /* CSS for labels */
+  label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* CSS for input fields and select box */
+  input[type="submit"],
+  select {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 3px;
+  }
+
+  /* CSS for form layout */
+  form {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+</style>
